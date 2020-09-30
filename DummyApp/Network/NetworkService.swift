@@ -10,9 +10,11 @@ import Foundation
 import Alamofire
 
 final class NetworkService {
-    private var alamofire: Session {
-        let interceptor = RequestInterceptor()
-        return Session(interceptor: interceptor)
+    private let interceptor = RequestInterceptor()
+    private let alamofire: Session
+    
+    init() {
+        self.alamofire = Session(interceptor: interceptor)
     }
 }
 

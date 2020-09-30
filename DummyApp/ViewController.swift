@@ -9,12 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let networkService = NetworkService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func test(_ sender: Any) {
+        networkService.userListRequest(page: 0, limit: 20) { result in
+            switch result {
+            case .success(let users): print(users)
+            case .failure(let error): print(error.localizedDescription)
+            }
+        }
+    }
+    
 }
 
