@@ -14,7 +14,7 @@ struct UserResponse: Decodable {
 
 struct User: Decodable {
     let id: String
-    let fistName: String
+    let firstName: String
     let lastName: String
     let picture: String
 }
