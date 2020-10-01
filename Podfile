@@ -11,6 +11,6 @@ target 'DummyApp' do
  pod 'XCoordinator', '~> 2.0.7'
  pod 'RxSwift'
  pod 'RxCocoa'
-
+ pod 'Kingfisher', '~> 5.15.5'
 
 end
