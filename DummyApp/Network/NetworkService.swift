@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 final class NetworkService {
     private let interceptor = RequestInterceptor()
@@ -18,32 +19,38 @@ final class NetworkService {
     }
 }
 
-extension NetworkService {
+extension NetworkService: NetworkServiceProtocol{
     
-    func userListRequest(page: Int, limit: Int,
-                         completion: @escaping (Result<[User], AFError>) -> Void) {
-        let route: UserRouter = .fecthUsersList(page: page, limit: limit)
-        
-        alamofire.request(route)
-            .validate()
-            .responseDecodable(of: UserResponse.self) { result in
-                switch result.result {
-                case .success(let userResponse): completion(.success(userResponse.data))
-                case .failure(let error): completion(.failure(error))
-                }
+    func userListRequest(page: Int, limit: Int) -> Observable<[User]> {
+        return Observable.create { [weak self] observable -> Disposable in
+            let route: UserRouter = .fecthUsersList(page: page, limit: limit)
+            
+            self?.alamofire.request(route)
+                .validate()
+                .responseDecodable(of: UserResponse.self) { result in
+                    switch result.result {
+                    case .success(let userResponse):
+                        observable.onNext(userResponse.data)
+                    case .failure(let error): observable.onError(error)
+                    }
+            }
+            return Disposables.create()
         }
     }
     
-    func userDetail(with id: String, completion: @escaping (Result<UserProfile, AFError>) -> Void) {
-        let route: UserRouter = .userDetail(id: id)
-        
-        alamofire.request(route)
-            .validate()
-            .responseDecodable(of: UserProfile.self) { result in
-                switch result.result {
-                case .success(let profile): completion(.success(profile))
-                case .failure(let error): completion(.failure(error))
-                }
+    func userDetail(with id: String) -> Single<UserProfile> {
+        return Single.create { [weak self] single -> Disposable in
+            let route: UserRouter = .userDetail(id: id)
+            
+            self?.alamofire.request(route)
+                .validate()
+                .responseDecodable(of: UserProfile.self) { result in
+                    switch result.result {
+                    case .success(let profile): single(.success(profile))
+                    case .failure(let error): single(.error(error))
+                    }
+            }
+            return Disposables.create()
         }
     }
 }

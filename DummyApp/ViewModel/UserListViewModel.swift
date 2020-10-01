@@ -12,7 +12,7 @@ import RxCocoa
 
 final class UserListViewModel: UserListViewModelProtocol {
     
-    private let networkService: NetworkService
+    private let networkService: NetworkServiceProtocol
     private let disposeBag = DisposeBag()
     
     private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay(value: true)
@@ -41,7 +41,7 @@ final class UserListViewModel: UserListViewModelProtocol {
         return Observable.page(make: nextPage, while: hasNext, when: self.loadNextPageTrigger)
     }()
     
-    init(networkService: NetworkService, loadNextPageTrigger: Observable<Void>) {
+    init(networkService: NetworkServiceProtocol, loadNextPageTrigger: Observable<Void>) {
         self.networkService = networkService
         self.loadNextPageTrigger = loadNextPageTrigger
         self.isLoadingObservable = self.isLoadingRelay.share()
