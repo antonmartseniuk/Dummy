@@ -8,6 +8,7 @@
 
 import Foundation
 import XCoordinator
+import SwiftUI
 
 enum MainAppRouter: Route {
     case userList
@@ -24,9 +25,14 @@ class MainAppCoordinator: NavigationCoordinator<MainAppRouter> {
         switch route {
         case .userList:
             let vc = UIStoryboard.mainViewController()
-        return .push(vc)
-            
+            vc.unownedRouter = unownedRouter
+            return .push(vc)
         case .userProfile:
+            if #available(iOS 13, *) {
+                let detailView = DetailView()
+                let host = UIHostingController(rootView: detailView)
+                return .push(host)
+            }
             return .none()
         }
     }

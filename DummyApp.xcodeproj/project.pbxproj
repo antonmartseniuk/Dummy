@@ -12,6 +12,7 @@
 		8B0D45932525124C00733DCB /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D45912525124C00733DCB /* UserCell.swift */; };
 		8B0D45942525124C00733DCB /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0D45922525124C00733DCB /* UserCell.xib */; };
 		8B1E24E0252647AC005A718A /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1E24DF252647AC005A718A /* NetworkServiceProtocol.swift */; };
+		8B1E24E22526484C005A718A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1E24E12526484C005A718A /* DetailView.swift */; };
 		8B2773A32524BACF00EE09F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2773A22524BACF00EE09F7 /* AppDelegate.swift */; };
 		8B2773A52524BACF00EE09F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2773A42524BACF00EE09F7 /* SceneDelegate.swift */; };
 		8B2773A72524BACF00EE09F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2773A62524BACF00EE09F7 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 		8B0D45912525124C00733DCB /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8B0D45922525124C00733DCB /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		8B1E24DF252647AC005A718A /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		8B1E24E12526484C005A718A /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		8B27739F2524BACF00EE09F7 /* DummyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DummyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2773A22524BACF00EE09F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B2773A42524BACF00EE09F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				8B88361125261003002FE37F /* Footer */,
 				8B0D45962525126000733DCB /* Cell */,
 				8B2773A62524BACF00EE09F7 /* ViewController.swift */,
+				8B1E24E12526484C005A718A /* DetailView.swift */,
 				8B2773A82524BACF00EE09F7 /* Main.storyboard */,
 			);
 			path = UI;
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B0D45932525124C00733DCB /* UserCell.swift in Sources */,
+				8B1E24E22526484C005A718A /* DetailView.swift in Sources */,
 				8BB8DC492524C5F2000141B6 /* NetworkService.swift in Sources */,
 				8B0A4EF3252525CE00237889 /* RxPage.swift in Sources */,
 				8B2773A72524BACF00EE09F7 /* ViewController.swift in Sources */,

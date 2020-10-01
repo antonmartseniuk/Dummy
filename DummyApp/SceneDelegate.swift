@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    static let mainCoordinator = MainAppCoordinator()
+    static let mainCoordinator = MainAppCoordinator().strongRouter
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -21,8 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            SceneDelegate.mainCoordinator.strongRouter.setRoot(for: window)
+            window = UIWindow(windowScene: windowScene)
+            SceneDelegate.mainCoordinator.setRoot(for: window!)
         }
         
     }
