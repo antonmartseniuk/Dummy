@@ -21,4 +21,6 @@ extension UserCell {
         let cellNib = UINib(nibName: cellString, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: cellString)
     }
+    
+    static var cellHeight: CGFloat = 70
 }
