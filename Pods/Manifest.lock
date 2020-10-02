@@ -3,6 +3,8 @@ PODS:
   - Kingfisher (5.15.5):
     - Kingfisher/Core (= 5.15.5)
   - Kingfisher/Core (5.15.5)
+  - Kingfisher/SwiftUI (5.15.5):
+    - Kingfisher/Core
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -16,6 +18,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2.2)
   - Kingfisher (~> 5.15.5)
+  - Kingfisher/SwiftUI
   - RxCocoa
   - RxSwift
   - XCoordinator (~> 2.0.7)
@@ -37,6 +40,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   XCoordinator: 9ee654fedef1ffede33d5c11677708a555c00542
 
-PODFILE CHECKSUM: 56d30982dbb93c3d22664e10711c67d9db8b6107
+PODFILE CHECKSUM: ef5a72d6dcbae74a91fef7ae636516e5a6dd1cfe
 
 COCOAPODS: 1.9.3

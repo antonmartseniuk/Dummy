@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private var showAnimatingCell = false
     
-    private lazy var loadNextPageTrigger: Observable<Void> = {
+    lazy var loadNextPageTrigger: Observable<Void> = {
         return self.usersTableView.rx.contentOffset
             .flatMap { (offset) -> Observable<Void> in
                 let isNearBottomEdge = self.usersTableView.isNearBottomEdge()
@@ -31,15 +31,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel = UserListViewModel(networkService: NetworkService(),
-                                      loadNextPageTrigger: loadNextPageTrigger)
-        
         registeTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        viewModel.setPageTrigger(loadNextPageTrigger)
+        title = "Users List"
         bindViewModel()
     }
 }
@@ -51,19 +45,26 @@ private extension ViewController {
         usersTableView
             .rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
+        usersTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.usersTableView.deselectRow(at: indexPath, animated: true)
+                self?.viewModel.didSelectedRow(indexPath.row)
+        })
+        .disposed(by: disposeBag)
     }
     
     func bindViewModel() {
         viewModel.userListObservable
             .bind(to: usersTableView.rx.items(cellIdentifier: "UserCell",
                                                     cellType: UserCell.self)) {_, user, cell in
-                                                        cell.nameLabel.text = user.firstName
+                                                        cell.user = user
         }.disposed(by: disposeBag)
         
         viewModel
             .isLoadingObservable
-            .subscribe(onNext: { [weak self] isLoad in
-                self?.showAnimatingCell = isLoad
+            .subscribe(onNext: { [weak self] isLoading in
+                self?.showAnimatingCell = isLoading
             })
             .disposed(by: disposeBag)
     }

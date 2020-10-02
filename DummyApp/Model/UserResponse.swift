@@ -22,11 +22,16 @@ struct User: Decodable {
 enum Gender: String, Decodable {
     case female
     case male
+    case notDetemine
 }
 
 enum Title: String, Codable {
     case mrs
     case mr
+    case ms
+    case miss
+    case dr
+    case notDetemine = ""
 }
 
 struct Location: Codable {
@@ -64,5 +69,30 @@ extension UserProfile {
         case phone
         case registerDate
         case location
+    }
+}
+
+extension UserProfile {
+    var fullName: String {
+        return title.rawValue.capitalized + " " + firstName + " " + lastName
+    }
+    
+    var fullLocation: String {
+        return location.street + " " + location.state + " " + location.country
+    }
+}
+
+extension User {
+    var fullName: String {
+        return firstName + " " + lastName
+    }
+}
+
+extension UserProfile {
+    static func emptyProfile() -> UserProfile {
+        let location = Location(street: "", timezone: "", state: "", country: "")
+        return UserProfile(id: "", gender: .notDetemine, birthday: "", title: .notDetemine,
+                           lastName: "", firstName: "", email: "", pictureURL: "",
+                           phone: "", registerDate: "", location: location)
     }
 }

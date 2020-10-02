@@ -14,7 +14,6 @@ enum Storyboard: String {
 }
 
 extension UIStoryboard {
-    
     static func mainViewController() -> ViewController {
         return UIStoryboard(.main).instantiateViewController(with: ViewController.self)
     }

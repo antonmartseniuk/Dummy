@@ -33,9 +33,5 @@ final class RequestInterceptor: Alamofire.RequestInterceptor {
             response.statusCode == 401 else {
                 return completion(.doNotRetryWithError(error))
         }
-        
-        //TODO: Should make refresh token
-        // func refreshToken {}
-        
     }
 }

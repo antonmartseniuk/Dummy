@@ -10,6 +10,6 @@ import Foundation
 import RxSwift
 
 protocol NetworkServiceProtocol {
-    func userListRequest(page: Int, limit: Int) -> Observable<[User]>
+    func userListRequest(page: Int) -> Observable<[User]>
     func userDetail(with id: String) -> Single<UserProfile>
 }

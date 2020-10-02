@@ -12,10 +12,12 @@ import SwiftUI
 
 enum MainAppRouter: Route {
     case userList
-    case userProfile
+    case userProfile(id: String)
 }
 
 class MainAppCoordinator: NavigationCoordinator<MainAppRouter> {
+    
+    private let networkService: NetworkServiceProtocol = NetworkService()
     
     init() {
         super.init(initialRoute: .userList)
@@ -25,11 +27,14 @@ class MainAppCoordinator: NavigationCoordinator<MainAppRouter> {
         switch route {
         case .userList:
             let vc = UIStoryboard.mainViewController()
-            vc.unownedRouter = unownedRouter
+            let viewModel = UserListViewModel(networkService: networkService)
+            viewModel.unownedRouter = unownedRouter
+            vc.viewModel = viewModel
             return .push(vc)
-        case .userProfile:
+        case .userProfile(let id):
             if #available(iOS 13, *) {
-                let detailView = DetailView()
+                let viewModel = DetailViewModel(networkService: networkService, userID: id)
+                let detailView = DetailView(viewModel: viewModel)
                 let host = UIHostingController(rootView: detailView)
                 return .push(host)
             }

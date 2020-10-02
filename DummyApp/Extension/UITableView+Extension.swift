@@ -9,10 +9,6 @@
 import UIKit
 
 extension UITableView {
-    func dequeueReusableCell<T: UITableViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
-        return dequeueReusableCell(withIdentifier: String(describing: type), for: indexPath) as! T
-    }
-    
     func register<T: UITableViewHeaderFooterView>(type: T.Type, bundle: Bundle? = nil) {
         let className = String(describing: type)
         let nib = UINib(nibName: className, bundle: bundle)

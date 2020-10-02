@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import XCoordinator
 
 final class UserListViewModel: UserListViewModelProtocol {
     
@@ -18,13 +19,14 @@ final class UserListViewModel: UserListViewModelProtocol {
     private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     private let canFetchData: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     private let userListRelay: BehaviorRelay<[User]> = BehaviorRelay(value: [])
+    var unownedRouter: UnownedRouter<MainAppRouter>?
     
     // MARK: - Output
     var isLoadingObservable: Observable<Bool>
     var userListObservable: Observable<[User]>
     
     // MARK: - Input
-    private let loadNextPageTrigger: Observable<Void>
+    var loadNextPageTrigger: Observable<Void>!
     
     private lazy var page: Observable<Int> = {
         func nextPage(_ previousPage: Int?) -> Observable<Int> {
@@ -41,14 +43,21 @@ final class UserListViewModel: UserListViewModelProtocol {
         return Observable.page(make: nextPage, while: hasNext, when: self.loadNextPageTrigger)
     }()
     
-    init(networkService: NetworkServiceProtocol, loadNextPageTrigger: Observable<Void>) {
+    init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
-        self.loadNextPageTrigger = loadNextPageTrigger
         self.isLoadingObservable = self.isLoadingRelay.share()
         self.userListObservable = userListRelay.share()
-        
+    }
+    
+    func setPageTrigger(_ observable: Observable<Void>) {
+        self.loadNextPageTrigger = observable
         observeTrigger()
         observePage()
+    }
+    
+    func didSelectedRow(_ row: Int) {
+        let user = userListRelay.value[row]
+        unownedRouter?.trigger(.userProfile(id: user.id))
     }
 }
 
@@ -61,7 +70,7 @@ extension UserListViewModel {
                 guard let self = self else {
                     return Observable.empty()
                 }
-                return self.networkService.userListRequest(page: page, limit: 20)
+                return self.networkService.userListRequest(page: page)
             })
             .subscribe(onNext: { [weak self] users in
                 self?.updateUserList(users)

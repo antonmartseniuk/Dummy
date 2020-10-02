@@ -21,17 +21,17 @@ final class NetworkService {
 
 extension NetworkService: NetworkServiceProtocol{
     
-    func userListRequest(page: Int, limit: Int) -> Observable<[User]> {
-        return Observable.create { [weak self] observable -> Disposable in
-            let route: UserRouter = .fecthUsersList(page: page, limit: limit)
+    func userListRequest(page: Int) -> Observable<[User]> {
+        return Observable.create { [weak self] observer -> Disposable in
+            let route: UserRouter = .fecthUsersList(page: page, limit: 20)
             
             self?.alamofire.request(route)
                 .validate()
                 .responseDecodable(of: UserResponse.self) { result in
                     switch result.result {
                     case .success(let userResponse):
-                        observable.onNext(userResponse.data)
-                    case .failure(let error): observable.onError(error)
+                        observer.onNext(userResponse.data)
+                    case .failure(let error): observer.onError(error)
                     }
             }
             return Disposables.create()

@@ -12,4 +12,7 @@ import RxSwift
 protocol UserListViewModelProtocol {
     var isLoadingObservable: Observable<Bool> { get }
     var userListObservable: Observable<[User]> { get }
+    
+    func setPageTrigger(_ observable: Observable<Void>)
+    func didSelectedRow(_ row: Int)
 }

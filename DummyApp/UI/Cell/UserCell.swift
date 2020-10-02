@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UserCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    
+    var user: User! {
+        didSet { updateCell(user: user) }
+    }
 }
 
 extension UserCell {
@@ -23,4 +26,22 @@ extension UserCell {
     }
     
     static var cellHeight: CGFloat = 70
+}
+
+private extension UserCell {
+    func updateCell(user: User) {
+        self.nameLabel.text = user.fullName
+        let url = URL(string: user.picture)
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        iconImageView.kf.indicatorType = .activity
+        iconImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "person.circle"),
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+    }
 }
