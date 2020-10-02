@@ -32,7 +32,7 @@ private extension UserCell {
     func updateCell(user: User) {
         self.nameLabel.text = user.fullName
         let url = URL(string: user.picture)
-        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        let processor = RoundCornerImageProcessor(cornerRadius: 25)
         iconImageView.kf.indicatorType = .activity
         iconImageView.kf.setImage(
             with: url,

@@ -36,6 +36,10 @@ private func userProfile(_ user: UserProfile) -> some View {
             .clipped()
             .cornerRadius(60)
             .padding(10)
+            .clipShape(Circle())
+            .shadow(radius: 2)
+            .overlay(Circle()
+                .stroke(Color(red: 255 / 255, green: 221 / 255, blue: 89 / 255), lineWidth: 3))
         Text(user.fullName)
             .font(.subheadline)
         HStack(alignment: .center, spacing: 10) {
@@ -79,7 +83,7 @@ private func userProfile(_ user: UserProfile) -> some View {
                    maxHeight: 70,
                    alignment: .center)
                 .overlay(RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue, lineWidth: 1))
+                    .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
             Button(action: {
                 print("HELLo")
             }) {
@@ -98,7 +102,7 @@ private func userProfile(_ user: UserProfile) -> some View {
                    maxHeight: 70,
                    alignment: .center)
                 .overlay(RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue, lineWidth: 1))
+                    .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
             Button(action: {
                 print("HELLo")
             }) {
@@ -117,7 +121,7 @@ private func userProfile(_ user: UserProfile) -> some View {
                    maxHeight: 70,
                    alignment: .center)
                 .overlay(RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue, lineWidth: 1))
+                    .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
             Button(action: {
                 print("HELLo")
             }) {
@@ -136,9 +140,9 @@ private func userProfile(_ user: UserProfile) -> some View {
                    maxHeight: 70,
                    alignment: .center)
                 .overlay(RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue, lineWidth: 1))
+                    .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
         }
-        
+        .background(Color(red: 130 / 255, green: 204 / 255, blue: 221 / 255))
         Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry")
             .padding(.all, 10)
             .frame(minWidth: 0,
@@ -167,7 +171,7 @@ private func userProfile(_ user: UserProfile) -> some View {
                     )
                 }
                 .overlay(RoundedRectangle(cornerRadius: 0)
-                .stroke(Color.blue, lineWidth: 1))
+                .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
             }
             Button(action: {
                 print("TAPPED")
@@ -187,7 +191,7 @@ private func userProfile(_ user: UserProfile) -> some View {
                     )
                 }
                 .overlay(RoundedRectangle(cornerRadius: 0)
-                .stroke(Color.blue, lineWidth: 1))
+                .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
             }
         }
         .frame(minWidth: 0,
@@ -214,8 +218,7 @@ private func userProfile(_ user: UserProfile) -> some View {
                alignment: .center
         )
             .overlay(RoundedRectangle(cornerRadius: 0)
-                .stroke(Color.blue, lineWidth: 1))
-        
+                .stroke(Color(red: 69 / 255, green: 170 / 255, blue: 242 / 255), lineWidth: 1))
         VStack {
             Text("Qualification")
                 .font(.headline)
